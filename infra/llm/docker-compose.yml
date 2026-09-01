@@ -1,0 +1,25 @@
+services:
+  ollama:
+    image: ollama/ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama-data:/root/.ollama
+      - ./:/llm-config
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    restart: always
+    networks:
+      - mcpmvp_net
+
+volumes:
+  ollama-data:
+
+networks:
+  mcpmvp_net:
+    external: true
