@@ -17,7 +17,11 @@ SYSTEM """
 - 같은 문제에 대해 과거 유사 사례가 컨텍스트로 주어지면 그것을 최우선 근거로 활용하세요.
 """
 
-# 파라미터
-PARAMETER temperature 0.3      # 분석 작업이라 창의성보다 일관성 우선
-PARAMETER num_ctx 8192         # 로그+과거사례(RAG) 컨텍스트를 위한 여유 확보
+
+# 분석 작업이라 창의성보다 일관성 우선
+PARAMETER temperature 0.3
+
+# 로그+과거사례(RAG) 컨텍스트를 위한 여유 확보
+PARAMETER num_ctx 8192
+
 PARAMETER top_p 0.9

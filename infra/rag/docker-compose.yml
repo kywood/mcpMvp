@@ -1,0 +1,40 @@
+services:
+  neo4j:
+    image: neo4j:5-community
+    container_name: mcpmvp-neo4j
+    restart: unless-stopped
+    environment:
+      # neo4j/<password> 형식. 비밀번호는 8자 이상, 실제 운영시 .env로 분리 권장
+      NEO4J_AUTH: neo4j/mcpmvp1234
+      # APOC 플러그인: LangChain GraphRAG 연동, 배치 쿼리 등에 자주 필요
+      NEO4J_PLUGINS: '["apoc"]'
+      # 메모리 설정 (8GB RAM 로컬 환경 기준 최소치, 필요시 조정)
+      NEO4J_server_memory_heap_initial__size: 512m
+      NEO4J_server_memory_heap_max__size: 1G
+      NEO4J_server_memory_pagecache_size: 512m
+    ports:
+      - "7474:7474"   # Neo4j Browser (웹 콘솔)
+      - "7687:7687"   # Bolt 프로토콜 (LangChain/드라이버 연결용)
+    volumes:
+      - neo4j-data:/data
+      - neo4j-logs:/logs
+      - neo4j-plugins:/plugins
+    networks:
+      - mcpmvp_net
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:7474 || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+networks:
+  mcpmvp_net:
+    external: true
+
+volumes:
+  neo4j-data:
+    name: mcpmvp-neo4j-data
+  neo4j-logs:
+    name: mcpmvp-neo4j-logs
+  neo4j-plugins:
+    name: mcpmvp-neo4j-plugins
