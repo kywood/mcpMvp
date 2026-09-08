@@ -1,0 +1,17 @@
+services:
+  relay-server:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+    container_name: relay-server
+    ports:
+      - "8000:8000"
+    environment:
+      PG_HOST: mcpmvp-postgres
+    networks:
+      - mcpmvp_net
+    restart: unless-stopped
+
+networks:          # ← services와 같은 들여쓰기 레벨 (최상위)
+  mcpmvp_net:
+    external: true
