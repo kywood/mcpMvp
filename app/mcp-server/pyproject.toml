@@ -1,0 +1,14 @@
+[project]
+name = "mcp-server"
+version = "0.1.0"
+description = "Add your description here"
+authors = [
+    { name = "kywood", email = "backboss78@gmail.com" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "fastmcp>=4.0.3",
+]
+
+[tool.uv]
+package = false

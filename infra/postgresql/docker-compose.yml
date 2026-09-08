@@ -1,5 +1,5 @@
 services:
-  postgres:
+  mcpmvp-postgres:
     image: postgres:16
     container_name: mcpmvp-postgres
     restart: unless-stopped

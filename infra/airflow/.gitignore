@@ -1,0 +1,29 @@
+# Virtual Environments (가상환경)
+.venv/
+venv/
+ENV/
+
+# Environment Variables & Secrets (환경변수 및 비밀번호)
+.env
+.env.*
+
+# Airflow Runtime Logs & Databases (로그 및 로컬 DB)
+logs/
+*.db
+*.log
+*.pid
+
+# Python Cache & Compiled Files (파이썬 캐시)
+__pycache__/
+*.py[cod]
+*$py.class
+
+# IDE / Editor Settings (에디터 설정)
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Docker / OS Junk Files
+.DS_Store
+Thumbs.db

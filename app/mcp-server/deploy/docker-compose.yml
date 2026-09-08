@@ -1,0 +1,15 @@
+services:
+  mcp-server:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+    container_name: mcp-server
+    ports:
+      - "8001:8001"
+    networks:
+      - mcpmvp_net
+    restart: unless-stopped
+
+networks:
+  mcpmvp_net:
+    external: true
