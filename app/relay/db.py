@@ -44,3 +44,24 @@ def insert_failure_log(payload: dict) -> int:
         return row_id
     finally:
         conn.close()
+
+
+
+def save_rca_result(row_id: int, rca_text: str, status: str = "completed"):
+    """LLM RCA 분석 결과 저장"""
+    conn = get_conn()
+    try:
+        with conn.cursor() as cur:
+            cur.execute(
+                """
+                UPDATE failure_logs
+                SET rca_result = %s, rca_status = %s
+                WHERE id = %s;
+                """,
+                (rca_text, status, row_id),
+            )
+        conn.commit()
+    finally:
+        conn.close()
+
+
