@@ -1,3 +1,11 @@
+
+
+
+import os
+os.environ.setdefault("PG_HOST", "localhost")
+os.environ.setdefault("OLLAMA_URL", "http://localhost:11434/api/chat")
+os.environ.setdefault("MCP_URL", "http://localhost:8001/mcp")
+
 from fastapi import FastAPI, BackgroundTasks
 from schemas import FailurePayload
 from db import insert_failure_log
@@ -27,3 +35,19 @@ async def receive_failure(payload: FailurePayload, background_tasks: BackgroundT
 @app.get("/health")
 async def health():
     return {"status": "ok"}
+
+
+
+
+if __name__ == "__main__":
+    import os
+    import uvicorn
+
+    os.environ.setdefault("PG_HOST", "localhost")
+    os.environ.setdefault("OLLAMA_URL", "http://localhost:11434/api/chat")
+    os.environ.setdefault("MCP_URL", "http://localhost:8001/mcp")
+
+    uvicorn.run(app, host="0.0.0.0", port=8000)
+
+
+
